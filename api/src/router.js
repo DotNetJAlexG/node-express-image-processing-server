@@ -1,7 +1,9 @@
 const {Router} = require('express');
 const multer = require('multer');
+const path = require('path');
 
 const router = Router();
+const photoPath = path.resolve(__dirname, '../../client/photo-viewer.html');
 
 const filename = (request, file, callback) => {
     callback(null, file.originalname);
@@ -24,6 +26,11 @@ const fileFilter = (request, file, callback) => {
 
 const upload = multer({fileFilter, storage});
 
+
+
+router.get('/photo-viewer', (request, response) => {
+    response.sendFile(photoPath);
+});
 router.post('/upload', upload.single('photo'), (request, response) => {
     if ('fileValidationError' in request) {
         return response.status(400).json({error: request.fileValidationError});
