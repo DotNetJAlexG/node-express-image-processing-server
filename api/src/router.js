@@ -32,7 +32,7 @@ router.get('/photo-viewer', (request, response) => {
     response.sendFile(photoPath);
 });
 router.post('/upload', upload.single('photo'), (request, response) => {
-    if ('fileValidationError' in request) {
+    if (request.fileValidationError) {
         return response.status(400).json({error: request.fileValidationError});
     }
     else {
