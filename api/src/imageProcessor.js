@@ -46,7 +46,7 @@ const imageProcessor = (filename) => {
                 });
                 resizeWorker.on('exit', (code) => {
                     if (code !== 0) {
-                        reject(new Error('Exited with status code ' + 0));
+                        reject(new Error('Exited with status code ' + code));
                     }
                 });     
                 monochromeWorker.on('message', (message) => {
@@ -60,7 +60,7 @@ const imageProcessor = (filename) => {
                 });
                 monochromeWorker.on('exit', (code) => {
                     if (code !== 0) {
-                        reject(new Error('Exited with status code ' + 0));
+                        reject(new Error('Exited with status code ' + code));
                     }
                 });                              
             }
